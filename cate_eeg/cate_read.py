@@ -3,7 +3,7 @@ import mne
 import warnings
 
 
-def text_to_raw(file_name, location, sfreq, col_remove=[], montage_type='standard_1020'):
+def text_to_raw(file_name, location, sampling_freq, col_remove=[], montage_type='standard_1020'):
     # Read EEG data from text file
     eeg_df = pd.read_table(file_name, header=None)
     # Read Location from text file
@@ -18,7 +18,7 @@ def text_to_raw(file_name, location, sfreq, col_remove=[], montage_type='standar
 
     # Create Info MNE File
     channel_type = ['eeg'] * 19
-    info = mne.create_info(ch_names=channel_name, ch_types=channel_type, sfreq=sfreq)
+    info = mne.create_info(ch_names=channel_name, ch_types=channel_type, sfreq=sampling_freq)
 
     # Create Raw MNE file
     raw = mne.io.RawArray(eeg_matrix_np, info)
