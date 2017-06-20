@@ -71,3 +71,22 @@ def connection_to_dataframe(epoch_connection):
             con_df[str(i)] = np.asarray(all_con)
             all_con = []
     return con_df.transpose()
+
+
+def connection_df_to_excel(df_list, sheets, file_name, spaces):
+    """
+    Save Connection list of dataframe into excel files. dataframe
+    :param df_list: list of dataframe
+    :param sheets: Sheets Name
+    :param file_name: File Name
+    :param spaces: Space between dataframe in excel
+    :return: None
+    """
+    writer = pd.ExcelWriter(file_name,engine='xlsxwriter')
+    row = 0
+    for dataframe in df_list:
+        dataframe.to_excel(writer,sheet_name=sheets,startrow=row , startcol=0)
+        row = row + len(dataframe.index) + spaces + 1
+    writer.save()
+
+
