@@ -1,6 +1,6 @@
 import pickle
 import numpy as np
-
+import pandas as pd
 
 def connection_count(connectivity_matrix, mask_name, threshold):
     """
@@ -50,16 +50,24 @@ def connection_count(connectivity_matrix, mask_name, threshold):
     # Return the count of connection
     return epoch_connection
 
-    # print connectivity_mask.keys()
 
-
-# with open('objs.pickle','rb') as f:
-#     con = pickle.load(f)
-#
-# print con[0].shape
-# epoch_connection = connection_count(con, 'Miami', 0.5)
-#
-# print len(epoch_connection)
-#
-# print epoch_connection[0][5]
-
+def connection_to_dataframe(epoch_connection):
+    """
+    Convert connection from "connection_count" to pandas dataframe
+    with alignment
+    :param epoch_connection:
+    :return: pandas dataframe of connection
+    """
+    all_con = []
+    for i in range(len(epoch_connection)):
+        if i < 1:
+            for j in range(len(epoch_connection[0])):
+                all_con += epoch_connection[i][j].items()
+            con_df = pd.DataFrame(all_con, columns=['Region', str(i)])
+            all_con = []
+        else:
+            for j in range(len(epoch_connection[0])):
+                all_con += epoch_connection[i][j].values()
+            con_df[str(i)] = np.asarray(all_con)
+            all_con = []
+    return con_df.transpose()
