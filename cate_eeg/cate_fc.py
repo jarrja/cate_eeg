@@ -1,6 +1,10 @@
 import pickle
 import numpy as np
 import pandas as pd
+import os
+# Locate mask directory
+FUNC_DIR = '/Users/jarr/Dropbox/Research/CATE_EEG_MASTER/cate_eeg'
+
 
 def connection_count(connectivity_matrix, mask_name, threshold):
     """
@@ -18,12 +22,16 @@ def connection_count(connectivity_matrix, mask_name, threshold):
 
     # Select baptist mask for counting
     if mask_name is 'Baptist':
-        with open('BaptistConnectivityMask.pickle', 'rb') as f:
+        # Join the pickle directory with the mask name
+        pickle_path = os.path.join(FUNC_DIR,'BaptistConnectivityMask.pickle')
+        with open(pickle_path, 'rb') as f:
             mask_object = pickle.load(f)
         connectivity_mask = mask_object[0]
     # Select miami mask for counting
     elif mask_name is 'Miami':
-        with open('MiamiConnectivityMask.pickle', 'rb') as f:
+        # Join the pickle directory with the mask name
+        pickle_path = os.path.join(FUNC_DIR, 'MiamiConnectivityMask.pickle')
+        with open(pickle_path, 'rb') as f:
             mask_object = pickle.load(f)
         connectivity_mask = mask_object[0]
     else:
