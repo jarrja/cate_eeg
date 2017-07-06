@@ -5,8 +5,7 @@ import os
 # Locate mask directory
 # Workstation between windows and OSX
 FUNC_DIR = '/Users/jarr/Dropbox/Research/CATE_EEG_MASTER/cate_eeg'
-if not os.path.isdir(FUNC_DIR):
-    FUNC_DIR = 'C:\Users\pjanw001\Desktop\cate_eeg\cate_eeg'
+
 
 def connection_count(connectivity_matrix, mask_name, threshold):
     """
