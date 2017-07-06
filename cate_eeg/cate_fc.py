@@ -3,8 +3,10 @@ import numpy as np
 import pandas as pd
 import os
 # Locate mask directory
+# Workstation between windows and OSX
 FUNC_DIR = '/Users/jarr/Dropbox/Research/CATE_EEG_MASTER/cate_eeg'
-
+if not os.path.isdir(FUNC_DIR):
+    FUNC_DIR = 'C:\Users\pjanw001\Desktop\cate_eeg\cate_eeg'
 
 def connection_count(connectivity_matrix, mask_name, threshold):
     """
@@ -23,7 +25,8 @@ def connection_count(connectivity_matrix, mask_name, threshold):
     # Select baptist mask for counting
     if mask_name is 'Baptist':
         # Join the pickle directory with the mask name
-        pickle_path = os.path.join(FUNC_DIR,'BaptistConnectivityMask.pickle')
+        pickle_path = os.path.join(FUNC_DIR, 'BaptistConnectivityMask.pickle')
+        print "Baptist Mask is selected at {}".format(pickle_path)
         with open(pickle_path, 'rb') as f:
             mask_object = pickle.load(f)
         connectivity_mask = mask_object[0]
@@ -31,6 +34,7 @@ def connection_count(connectivity_matrix, mask_name, threshold):
     elif mask_name is 'Miami':
         # Join the pickle directory with the mask name
         pickle_path = os.path.join(FUNC_DIR, 'MiamiConnectivityMask.pickle')
+        print "Miami Mask is selected at {}".format(pickle_path)
         with open(pickle_path, 'rb') as f:
             mask_object = pickle.load(f)
         connectivity_mask = mask_object[0]
