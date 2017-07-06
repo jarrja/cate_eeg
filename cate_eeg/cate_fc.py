@@ -5,7 +5,7 @@ import os
 # Locate mask directory
 # Workstation between windows and OSX
 FUNC_DIR = '/Users/jarr/Dropbox/Research/CATE_EEG_MASTER/cate_eeg'
-
+test = 'windows'
 
 def connection_count(connectivity_matrix, mask_name, threshold):
     """
